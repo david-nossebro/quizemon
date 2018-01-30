@@ -1,4 +1,4 @@
-# quizemon
+# Quizemon
 
 ## Rest API
 This project is found in the folder "rest-api". 
