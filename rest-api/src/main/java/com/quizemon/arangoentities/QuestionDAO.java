@@ -1,23 +1,24 @@
 package com.quizemon.arangoentities;
 
 import com.arangodb.springframework.annotation.Document;
+import com.quizemon.types.Question;
 import org.springframework.data.annotation.Id;
 
 import java.util.Arrays;
 
 @Document("questions")
-public class Question {
+public class QuestionDAO {
 
     @Id
     private String id;
     private String quesiton;
     private String[] alternatives;
 
-    public Question() {
+    public QuestionDAO() {
         super();
     }
 
-    public Question(final String quesiton, final String[] alternatives) {
+    public QuestionDAO(final String quesiton, final String[] alternatives) {
         this.quesiton = quesiton;
         this.alternatives = alternatives;
     }
@@ -41,5 +42,9 @@ public class Question {
                 ", quesiton='" + quesiton + '\'' +
                 ", alternatives=" + Arrays.toString(alternatives) +
                 '}';
+    }
+
+    public Question toType() {
+        return new Question(id, quesiton, alternatives);
     }
 }

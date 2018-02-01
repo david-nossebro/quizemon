@@ -1,7 +1,7 @@
 package com.quizemon.arangorepositories;
 
 import com.arangodb.springframework.repository.ArangoRepository;
-import com.quizemon.arangoentities.Question;
+import com.quizemon.arangoentities.QuestionDAO;
 
-public interface QuestionRepository extends ArangoRepository<Question> {
+public interface QuestionRepository extends ArangoRepository<QuestionDAO> {
 }
