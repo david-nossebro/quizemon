@@ -2,6 +2,9 @@ package com.quizemon.arangoentities;
 
 import com.arangodb.springframework.annotation.Document;
 import com.quizemon.types.Question;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotNull;
@@ -10,6 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 
 @Document("questions")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class QuestionDAO {
 
     @Id
@@ -25,40 +31,6 @@ public class QuestionDAO {
             max = 4
     )
     private String[] alternatives;
-
-    public QuestionDAO() {
-        super();
-    }
-
-    public QuestionDAO(final String id, final String question, final String[] alternatives) {
-        this.id = id;
-        this.question = question;
-        this.alternatives = alternatives;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getQuestion() {
-        return question;
-    }
-
-    public void setQuestion(String quesiton) {
-        this.question = quesiton;
-    }
-
-    public String[] getAlternatives() {
-        return alternatives;
-    }
-
-    public void setAlternatives(String[] alternatives) {
-        this.alternatives = alternatives;
-    }
 
     public Question toResponseType() {
         List<String> altList = Arrays.asList(alternatives);

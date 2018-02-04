@@ -29,6 +29,13 @@
             <version>23.6-jre</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.20</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- tag::actuator[] -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
