@@ -11,32 +11,33 @@ import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public @Data class Question {
+public @Data
+class Question {
 
-    private String id;
+  private String id;
 
-    @NotNull(message = "You must provide a question in the request")
-    private String question;
+  @NotNull(message = "You must provide a question in the request")
+  private String question;
 
-    @NotNull(message = "You must provide an answer in the request")
-    private String answer;
+  @NotNull(message = "You must provide an answer in the request")
+  private String answer;
 
-    @NotNull(message = "You must provide 3 alternatives")
-    @Size(
-            min = 3,
-            max = 3,
-            message = "You must provide 3 alternatives"
-    )
-    private List<String> alternatives;
+  @NotNull(message = "You must provide 3 alternatives")
+  @Size(
+    min = 3,
+    max = 3,
+    message = "You must provide 3 alternatives"
+  )
+  private List<String> alternatives;
 
-    public QuestionDAO toDao() {
+  public QuestionDAO toDao() {
 
-        String[] alternativesArray = new String[4];
-        alternativesArray[0] = answer;
-        for(int i=0; i<3; i++) {
-            alternativesArray[i+1] = alternatives.get(i);
-        }
-
-        return new QuestionDAO(id, question, alternativesArray);
+    String[] alternativesArray = new String[4];
+    alternativesArray[0] = answer;
+    for (int i = 0; i < 3; i++) {
+      alternativesArray[i + 1] = alternatives.get(i);
     }
+
+    return new QuestionDAO(id, question, alternativesArray);
+  }
 }

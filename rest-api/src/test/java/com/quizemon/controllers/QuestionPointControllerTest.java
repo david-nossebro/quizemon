@@ -1,6 +1,5 @@
 package com.quizemon.controllers;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,52 +19,52 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class QuestionPointControllerTest {
 
-    @Autowired
-    private MockMvc mvc;
+  @Autowired
+  private MockMvc mvc;
 
-    @Test
-    public void getQuestionPoints() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/questionpoints").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
+  @Test
+  public void getQuestionPoints() throws Exception {
+    mvc.perform(MockMvcRequestBuilders.get("/questionpoints").accept(MediaType.APPLICATION_JSON))
+      .andExpect(status().isOk());
+  }
 
-    @Test
-    public void postQuestionPoint() throws Exception {
+  @Test
+  public void postQuestionPoint() throws Exception {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("latitude", 45.134563);
-        jsonObject.put("longitude", 35.121682);
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("latitude", 45.134563);
+    jsonObject.put("longitude", 35.121682);
 
-        mvc.perform(MockMvcRequestBuilders.post("/questionpoints")
-                .content(jsonObject.toString())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().json(jsonObject.toString()));
-    }
+    mvc.perform(MockMvcRequestBuilders.post("/questionpoints")
+      .content(jsonObject.toString())
+      .contentType(MediaType.APPLICATION_JSON))
+      .andExpect(status().isOk())
+      .andExpect(content().json(jsonObject.toString()));
+  }
 
-    @Test
-    public void postQuestionWithoutLatitude() throws Exception {
+  @Test
+  public void postQuestionWithoutLatitude() throws Exception {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("longitude", 35.121682);
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("longitude", 35.121682);
 
-        mvc.perform(MockMvcRequestBuilders.post("/questionpoints")
-                .content(jsonObject.toString())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-    }
+    mvc.perform(MockMvcRequestBuilders.post("/questionpoints")
+      .content(jsonObject.toString())
+      .contentType(MediaType.APPLICATION_JSON))
+      .andExpect(status().isBadRequest());
+  }
 
-    @Test
-    public void postQuestionWithoutLongitude() throws Exception {
+  @Test
+  public void postQuestionWithoutLongitude() throws Exception {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("latitude", 45.134563);
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("latitude", 45.134563);
 
-        mvc.perform(MockMvcRequestBuilders.post("/questionpoints")
-                .content(jsonObject.toString())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-    }
+    mvc.perform(MockMvcRequestBuilders.post("/questionpoints")
+      .content(jsonObject.toString())
+      .contentType(MediaType.APPLICATION_JSON))
+      .andExpect(status().isBadRequest());
+  }
 
     /*
     @Test
@@ -83,6 +82,6 @@ public class QuestionPointControllerTest {
     */
 
 
-    //TODO: Add tests for PUT
-    //TODO: Add tests for DELETE
+  //TODO: Add tests for PUT
+  //TODO: Add tests for DELETE
 }

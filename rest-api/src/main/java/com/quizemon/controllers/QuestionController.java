@@ -25,66 +25,66 @@ import java.util.List;
 @RequestMapping("/questions")
 public class QuestionController {
 
-    @Autowired
-    private QuestionRepository questionRepository;
+  @Autowired
+  private QuestionRepository questionRepository;
 
-    @GetMapping
-    public List<Question> get() {
-        List<Question> questions = new ArrayList<>();
-        questionRepository.findAll().forEach(q -> questions.add(q.toResponseType()));
-        return questions;
+  @GetMapping
+  public List<Question> get() {
+    List<Question> questions = new ArrayList<>();
+    questionRepository.findAll().forEach(q -> questions.add(q.toResponseType()));
+    return questions;
+  }
+
+  @GetMapping(path = "/{id}")
+  public Question get(@PathVariable String id) {
+    QuestionDAO q = questionRepository.findOne(id);
+    if (q != null) {
+      return q.toResponseType();
+    }
+    throw new NotFoundException();
+  }
+
+  @PostMapping
+  public Question post(@RequestBody @Valid Question question) {
+    return questionRepository.save(question.toDao()).toResponseType();
+  }
+
+  @PutMapping(path = "/{id}")
+  public Question put(@PathVariable String id, @RequestBody @Valid Question question) {
+    if (!questionRepository.exists(id)) {
+      throw new NotFoundException();
     }
 
-    @GetMapping(path = "/{id}")
-    public Question get(@PathVariable String id) {
-        QuestionDAO q = questionRepository.findOne(id);
-        if(q != null) {
-            return q.toResponseType();
-        }
-        throw new NotFoundException();
+    question.setId(id);
+    return questionRepository.save(question.toDao()).toResponseType();
+  }
+
+  @PutMapping
+  public Question put(@RequestBody @Valid Question question) {
+    if (!questionRepository.exists(question.getId())) {
+      throw new NotFoundException();
     }
 
-    @PostMapping
-    public Question post(@RequestBody @Valid Question question) {
-        return questionRepository.save(question.toDao()).toResponseType();
+    return questionRepository.save(question.toDao()).toResponseType();
+  }
+
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @DeleteMapping("/{id}")
+  public void delete(@PathVariable String id) {
+    if (!questionRepository.exists(id)) {
+      throw new NotFoundException();
     }
 
-    @PutMapping(path = "/{id}")
-    public Question put(@PathVariable String id, @RequestBody @Valid Question question) {
-        if(!questionRepository.exists(id)) {
-            throw new NotFoundException();
-        }
+    questionRepository.delete(id);
+  }
 
-        question.setId(id);
-        return questionRepository.save(question.toDao()).toResponseType();
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @DeleteMapping()
+  public void delete(@RequestBody Question question) {
+    if (!questionRepository.exists(question.getId())) {
+      throw new NotFoundException();
     }
 
-    @PutMapping
-    public Question put(@RequestBody @Valid Question question) {
-        if(!questionRepository.exists(question.getId())) {
-            throw new NotFoundException();
-        }
-
-        return questionRepository.save(question.toDao()).toResponseType();
-    }
-
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
-        if(!questionRepository.exists(id)) {
-            throw new NotFoundException();
-        }
-
-        questionRepository.delete(id);
-    }
-
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping()
-    public void delete(@RequestBody Question question) {
-        if(!questionRepository.exists(question.getId())) {
-            throw new NotFoundException();
-        }
-
-        questionRepository.delete(question.getId());
-    }
+    questionRepository.delete(question.getId());
+  }
 }

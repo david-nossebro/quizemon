@@ -23,29 +23,29 @@ import java.util.List;
 @RequestMapping("/questionpoints")
 public class QuestionPointController {
 
-    @Autowired
-    QuestionPointRepository questionPointRepository;
+  @Autowired
+  QuestionPointRepository questionPointRepository;
 
-    @GetMapping
-    public List<QuestionPoint> get() {
-        List<QuestionPoint> questionPoints = new ArrayList<>();
-        questionPointRepository.findAll().forEach(q -> questionPoints.add(q.toResponseType()));
-        return questionPoints;
+  @GetMapping
+  public List<QuestionPoint> get() {
+    List<QuestionPoint> questionPoints = new ArrayList<>();
+    questionPointRepository.findAll().forEach(q -> questionPoints.add(q.toResponseType()));
+    return questionPoints;
+  }
+
+  @GetMapping("/{id}")
+  public QuestionPoint get(@PathVariable String id) {
+    if (!questionPointRepository.exists(id)) {
+      throw new NotFoundException();
     }
 
-    @GetMapping("/{id}")
-    public QuestionPoint get(@PathVariable String id) {
-        if(!questionPointRepository.exists(id)) {
-            throw new NotFoundException();
-        }
+    return questionPointRepository.findOne(id).toResponseType();
+  }
 
-        return questionPointRepository.findOne(id).toResponseType();
-    }
-
-    @PostMapping
-    public QuestionPoint post(@Valid @RequestBody QuestionPoint questionPoint) {
-        return questionPointRepository.save(questionPoint.toDao()).toResponseType();
-    }
+  @PostMapping
+  public QuestionPoint post(@Valid @RequestBody QuestionPoint questionPoint) {
+    return questionPointRepository.save(questionPoint.toDao()).toResponseType();
+  }
 
     /*
     @PostMapping
@@ -56,43 +56,43 @@ public class QuestionPointController {
     }
     */
 
-    @PutMapping("/{id}")
-    public QuestionPoint put(@PathVariable String id, @Valid @RequestBody QuestionPoint questionPoint) {
-        if(!questionPointRepository.exists(id)) {
-            throw new NotFoundException();
-        }
-
-        questionPoint.setId(id);
-        return questionPointRepository.save(questionPoint.toDao()).toResponseType();
+  @PutMapping("/{id}")
+  public QuestionPoint put(@PathVariable String id, @Valid @RequestBody QuestionPoint questionPoint) {
+    if (!questionPointRepository.exists(id)) {
+      throw new NotFoundException();
     }
 
-    @PutMapping
-    public QuestionPoint put(@Valid @RequestBody QuestionPoint questionPoint) {
-        if(!questionPointRepository.exists(questionPoint.getId())) {
-            throw new NotFoundException();
-        }
+    questionPoint.setId(id);
+    return questionPointRepository.save(questionPoint.toDao()).toResponseType();
+  }
 
-        return questionPointRepository.save(questionPoint.toDao()).toResponseType();
+  @PutMapping
+  public QuestionPoint put(@Valid @RequestBody QuestionPoint questionPoint) {
+    if (!questionPointRepository.exists(questionPoint.getId())) {
+      throw new NotFoundException();
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
-        if(!questionPointRepository.exists(id)) {
-            throw new NotFoundException();
-        }
+    return questionPointRepository.save(questionPoint.toDao()).toResponseType();
+  }
 
-        questionPointRepository.delete(id);
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @DeleteMapping("/{id}")
+  public void delete(@PathVariable String id) {
+    if (!questionPointRepository.exists(id)) {
+      throw new NotFoundException();
     }
 
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    @DeleteMapping
-    public void delete(@RequestBody QuestionPoint questionPoint) {
-        if(!questionPointRepository.exists(questionPoint.getId())) {
-            throw new NotFoundException();
-        }
+    questionPointRepository.delete(id);
+  }
 
-        questionPointRepository.delete(questionPoint.getId());
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  @DeleteMapping
+  public void delete(@RequestBody QuestionPoint questionPoint) {
+    if (!questionPointRepository.exists(questionPoint.getId())) {
+      throw new NotFoundException();
     }
+
+    questionPointRepository.delete(questionPoint.getId());
+  }
 
 }

@@ -20,98 +20,98 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class QuestionControllerTest {
 
-    @Autowired
-    private MockMvc mvc;
+  @Autowired
+  private MockMvc mvc;
 
-    @Test
-    public void getQuestions() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/questions").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
+  @Test
+  public void getQuestions() throws Exception {
+    mvc.perform(MockMvcRequestBuilders.get("/questions").accept(MediaType.APPLICATION_JSON))
+      .andExpect(status().isOk());
+  }
 
-    @Test
-    public void postQuestion() throws Exception {
+  @Test
+  public void postQuestion() throws Exception {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("question", "What color is the sun?");
-        jsonObject.put("answer", "Yellow");
-        JSONArray alternatives = new JSONArray();
-        alternatives.put("Green");
-        alternatives.put("Blue");
-        alternatives.put("Black");
-        jsonObject.put("alternatives", alternatives);
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("question", "What color is the sun?");
+    jsonObject.put("answer", "Yellow");
+    JSONArray alternatives = new JSONArray();
+    alternatives.put("Green");
+    alternatives.put("Blue");
+    alternatives.put("Black");
+    jsonObject.put("alternatives", alternatives);
 
-        mvc.perform(MockMvcRequestBuilders.post("/questions")
-                .content(jsonObject.toString())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(content().json(jsonObject.toString()));
-    }
+    mvc.perform(MockMvcRequestBuilders.post("/questions")
+      .content(jsonObject.toString())
+      .contentType(MediaType.APPLICATION_JSON))
+      .andExpect(status().isOk())
+      .andExpect(content().json(jsonObject.toString()));
+  }
 
-    @Test
-    public void postQuestionWithoutQuestion() throws Exception {
+  @Test
+  public void postQuestionWithoutQuestion() throws Exception {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("answer", "Yellow");
-        JSONArray alternatives = new JSONArray();
-        alternatives.put("Green");
-        alternatives.put("Blue");
-        alternatives.put("Black");
-        jsonObject.put("alternatives", alternatives);
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("answer", "Yellow");
+    JSONArray alternatives = new JSONArray();
+    alternatives.put("Green");
+    alternatives.put("Blue");
+    alternatives.put("Black");
+    jsonObject.put("alternatives", alternatives);
 
-        mvc.perform(MockMvcRequestBuilders.post("/questions")
-                .content(jsonObject.toString())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-    }
+    mvc.perform(MockMvcRequestBuilders.post("/questions")
+      .content(jsonObject.toString())
+      .contentType(MediaType.APPLICATION_JSON))
+      .andExpect(status().isBadRequest());
+  }
 
-    @Test
-    public void postQuestionWithoutAnswer() throws Exception {
+  @Test
+  public void postQuestionWithoutAnswer() throws Exception {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("question", "What color is the sun?");
-        JSONArray alternatives = new JSONArray();
-        alternatives.put("Green");
-        alternatives.put("Blue");
-        alternatives.put("Black");
-        jsonObject.put("alternatives", alternatives);
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("question", "What color is the sun?");
+    JSONArray alternatives = new JSONArray();
+    alternatives.put("Green");
+    alternatives.put("Blue");
+    alternatives.put("Black");
+    jsonObject.put("alternatives", alternatives);
 
-        mvc.perform(MockMvcRequestBuilders.post("/questions")
-                .content(jsonObject.toString())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-    }
+    mvc.perform(MockMvcRequestBuilders.post("/questions")
+      .content(jsonObject.toString())
+      .contentType(MediaType.APPLICATION_JSON))
+      .andExpect(status().isBadRequest());
+  }
 
-    @Test
-    public void postQuestionWithoutAlternatives() throws Exception {
+  @Test
+  public void postQuestionWithoutAlternatives() throws Exception {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("question", "What color is the sun?");
-        jsonObject.put("answer", "Yellow");
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("question", "What color is the sun?");
+    jsonObject.put("answer", "Yellow");
 
-        mvc.perform(MockMvcRequestBuilders.post("/questions")
-                .content(jsonObject.toString())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-    }
+    mvc.perform(MockMvcRequestBuilders.post("/questions")
+      .content(jsonObject.toString())
+      .contentType(MediaType.APPLICATION_JSON))
+      .andExpect(status().isBadRequest());
+  }
 
-    @Test
-    public void postQuestionWithOnlyOneAlternative() throws Exception {
+  @Test
+  public void postQuestionWithOnlyOneAlternative() throws Exception {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("question", "What color is the sun?");
-        jsonObject.put("answer", "Yellow");
-        JSONArray alternatives = new JSONArray();
-        alternatives.put("Green");
-        jsonObject.put("alternatives", alternatives);
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("question", "What color is the sun?");
+    jsonObject.put("answer", "Yellow");
+    JSONArray alternatives = new JSONArray();
+    alternatives.put("Green");
+    jsonObject.put("alternatives", alternatives);
 
-        mvc.perform(MockMvcRequestBuilders.post("/questions")
-                .content(jsonObject.toString())
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
-    }
+    mvc.perform(MockMvcRequestBuilders.post("/questions")
+      .content(jsonObject.toString())
+      .contentType(MediaType.APPLICATION_JSON))
+      .andExpect(status().isBadRequest());
+  }
 
 
-    //TODO: Add tests for PUT
-    //TODO: Add tests for DELETE
+  //TODO: Add tests for PUT
+  //TODO: Add tests for DELETE
 }
