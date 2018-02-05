@@ -1,6 +1,6 @@
 package com.quizemon.types;
 
-import com.quizemon.arangoentities.QuestionPointDAO;
+import com.quizemon.arangoentities.QuestionPointDao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +20,7 @@ public class QuestionPoint {
   @NotNull(message = "You need to provide longitude")
   private Double longitude;
 
-  public QuestionPointDAO toDao() {
-    return new QuestionPointDAO(id, latitude, longitude);
+  public QuestionPointDao toDao() {
+    return new QuestionPointDao(id, latitude, longitude);
   }
 }

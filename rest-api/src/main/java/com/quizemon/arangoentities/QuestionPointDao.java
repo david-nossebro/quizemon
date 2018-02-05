@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class QuestionPointDAO {
+public class QuestionPointDao {
 
   @Id
   private String id;

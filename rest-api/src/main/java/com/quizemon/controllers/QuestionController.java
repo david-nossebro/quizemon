@@ -1,8 +1,8 @@
 package com.quizemon.controllers;
 
 import com.quizemon.ResponseExceptions.NotFoundException;
-import com.quizemon.arangoentities.QuestionDAO;
-import com.quizemon.arangorepositories.QuestionRepository;
+import com.quizemon.arangoentities.QuestionDao;
+import com.quizemon.arangorepositories.QuestionRepo;
 import com.quizemon.types.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,18 +26,18 @@ import java.util.List;
 public class QuestionController {
 
   @Autowired
-  private QuestionRepository questionRepository;
+  private QuestionRepo questionRepo;
 
   @GetMapping
   public List<Question> get() {
     List<Question> questions = new ArrayList<>();
-    questionRepository.findAll().forEach(q -> questions.add(q.toResponseType()));
+    questionRepo.findAll().forEach(q -> questions.add(q.toResponseType()));
     return questions;
   }
 
   @GetMapping(path = "/{id}")
   public Question get(@PathVariable String id) {
-    QuestionDAO q = questionRepository.findOne(id);
+    QuestionDao q = questionRepo.findOne(id);
     if (q != null) {
       return q.toResponseType();
     }
@@ -46,45 +46,45 @@ public class QuestionController {
 
   @PostMapping
   public Question post(@RequestBody @Valid Question question) {
-    return questionRepository.save(question.toDao()).toResponseType();
+    return questionRepo.save(question.toDao()).toResponseType();
   }
 
   @PutMapping(path = "/{id}")
   public Question put(@PathVariable String id, @RequestBody @Valid Question question) {
-    if (!questionRepository.exists(id)) {
+    if (!questionRepo.exists(id)) {
       throw new NotFoundException();
     }
 
     question.setId(id);
-    return questionRepository.save(question.toDao()).toResponseType();
+    return questionRepo.save(question.toDao()).toResponseType();
   }
 
   @PutMapping
   public Question put(@RequestBody @Valid Question question) {
-    if (!questionRepository.exists(question.getId())) {
+    if (!questionRepo.exists(question.getId())) {
       throw new NotFoundException();
     }
 
-    return questionRepository.save(question.toDao()).toResponseType();
+    return questionRepo.save(question.toDao()).toResponseType();
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping("/{id}")
   public void delete(@PathVariable String id) {
-    if (!questionRepository.exists(id)) {
+    if (!questionRepo.exists(id)) {
       throw new NotFoundException();
     }
 
-    questionRepository.delete(id);
+    questionRepo.delete(id);
   }
 
   @ResponseStatus(HttpStatus.NO_CONTENT)
   @DeleteMapping()
   public void delete(@RequestBody Question question) {
-    if (!questionRepository.exists(question.getId())) {
+    if (!questionRepo.exists(question.getId())) {
       throw new NotFoundException();
     }
 
-    questionRepository.delete(question.getId());
+    questionRepo.delete(question.getId());
   }
 }

@@ -1,6 +1,6 @@
 package com.quizemon.types;
 
-import com.quizemon.arangoentities.QuestionDAO;
+import com.quizemon.arangoentities.QuestionDao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,7 +30,7 @@ class Question {
   )
   private List<String> alternatives;
 
-  public QuestionDAO toDao() {
+  public QuestionDao toDao() {
 
     String[] alternativesArray = new String[4];
     alternativesArray[0] = answer;
@@ -38,6 +38,6 @@ class Question {
       alternativesArray[i + 1] = alternatives.get(i);
     }
 
-    return new QuestionDAO(id, question, alternativesArray);
+    return new QuestionDao(id, question, alternativesArray);
   }
 }

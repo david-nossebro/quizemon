@@ -7,16 +7,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Arrays;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Document("questions")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class QuestionDAO {
+public class QuestionDao {
 
   @Id
   private String id;
