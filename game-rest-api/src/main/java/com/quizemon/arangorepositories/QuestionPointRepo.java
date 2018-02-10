@@ -4,6 +4,9 @@ import com.arangodb.springframework.annotation.Param;
 import com.arangodb.springframework.annotation.Query;
 import com.arangodb.springframework.repository.ArangoRepository;
 import com.quizemon.arangoentities.QuestionPointDao;
+import com.quizemon.types.QuestionPoint;
+
+import java.util.stream.Stream;
 
 public interface QuestionPointRepo extends ArangoRepository<QuestionPointDao> {
 

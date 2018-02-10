@@ -1,4 +1,4 @@
-package com.quizemon;
+package com.quizemon.admin;
 
 import com.arangodb.springframework.annotation.EnableArangoRepositories;
 import org.springframework.boot.CommandLineRunner;
@@ -11,10 +11,10 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @EnableArangoRepositories
-public class Application {
+public class AdminRestApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(AdminRestApplication.class, args);
   }
 
   @Bean

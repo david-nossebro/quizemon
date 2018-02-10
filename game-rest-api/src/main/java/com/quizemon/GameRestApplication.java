@@ -1,4 +1,4 @@
-package com.quizemon.admin;
+package com.quizemon;
 
 import com.arangodb.springframework.annotation.EnableArangoRepositories;
 import org.springframework.boot.CommandLineRunner;
@@ -11,10 +11,10 @@ import java.util.Arrays;
 
 @SpringBootApplication
 @EnableArangoRepositories
-public class Application {
+public class GameRestApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(GameRestApplication.class, args);
   }
 
   @Bean
