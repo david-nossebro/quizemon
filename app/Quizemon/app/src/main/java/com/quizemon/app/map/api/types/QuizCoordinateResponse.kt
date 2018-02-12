@@ -5,6 +5,6 @@ package com.quizemon.app.map.api.types
  */
 
 class QuizCoordinateResponse (
-        val coordinates: List<QuizCoordinateDto>
+        val coordinates: MutableList<QuizCoordinateDto>
 )
 

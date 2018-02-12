@@ -7,6 +7,6 @@ import java.math.BigDecimal
  */
 
 class QuizCoordinate(
-        val longitude: BigDecimal,
-        val latitude: BigDecimal
+        val longitude: Double,
+        val latitude: Double
 )
