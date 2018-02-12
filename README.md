@@ -26,6 +26,12 @@ java jar target/quizemon-game-rest-api-0.0.1.beta.jar
 ```
 You can also run the project from within your development environment by running the class "com.quizemon.Application"
 
+#### Docs
+When application is started you can find swagger documentation under:
+```
+http://localhost:8081/swagger-ui.html
+```
+
 ### Admin
 This project is found in the folder "admin-rest-api". 
 
@@ -38,3 +44,9 @@ To run the project run:
 java jar target/quizemon-admin-rest-api-0.0.1.beta.jar
 ```
 You can also run the project from within your development environment by running the class "com.quizemon.Application"
+
+#### Docs
+When application is started you can find swagger documentation under:
+```
+http://localhost:8080/swagger-ui.html
+```
