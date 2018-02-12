@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Objects;
 
 @RestController
@@ -20,14 +21,27 @@ public class QuestionController {
   @Autowired
   private QuestionRepo questionRepo;
 
+  /**
+   * Fetch a random question
+   * @return a Question
+   * @see Question
+   */
   @GetMapping("/randomquestion")
   public Question get() {
     return questionRepo.getRandom().toResponseType();
   }
 
   //TODO: Add test
+
+  /**
+   *
+   * @param   id        The id of the question you want to give an answer to.
+   * @param   response  QuestionResponse where you provide an answer
+   * @return            A QuestionResponse saying if your answer was correct or not, and what the correct answer is.
+   * @see     QuestionResponse
+   */
   @PostMapping("questions/{id}/response")
-  public QuestionResponse post(@PathVariable String id, @RequestBody QuestionResponse response) {
+  public QuestionResponse post(@PathVariable String id, @Valid @RequestBody QuestionResponse response) {
     QuestionDao questionDao = questionRepo.findOne(id);
     if(questionDao == null) {
       throw new ResponseExceptions.NotFoundException();
