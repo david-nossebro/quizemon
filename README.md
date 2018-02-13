@@ -1,5 +1,6 @@
 # Quizemon
-The goal of quizemon is to create a quiz game where questions are found on different geolocations.
+The goal of quizemon is to create a quiz game where questions are found on different geolocations. It will be built upon
+open technologies as far as possible and everyone who is willing to contribute to the project is welcome to do so.
  
 ## Rest API's
 The application is divided into two API's, one for the game and one for administration. To be able to run the API's
